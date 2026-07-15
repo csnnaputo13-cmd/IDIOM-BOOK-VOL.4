@@ -1,0 +1,2877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>IDIOM·BOOK·VOL.4 - Complete</title>
+  <style>
+    /* ===== GLOBAL RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #d4e8f7;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      padding: 12px;
+      margin: 0;
+      touch-action: manipulation;
+    }
+
+    .app-wrapper {
+      max-width: 1100px;
+      width: 100%;
+      background: #F97316;
+      border-radius: 32px 32px 24px 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 0 1px #7b2fbe inset;
+      padding: 20px 24px 16px;
+      transition: all 0.2s;
+    }
+
+    .exam-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      border-bottom: 2px solid #7b2fbe;
+      padding-bottom: 10px;
+      gap: 10px;
+    }
+    .exam-header h1 {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px #00000055;
+    }
+    .exam-header .progress-badge {
+      background: linear-gradient(145deg, #2a5a7a, #1a3a5a);
+      color: #f0e9c0;
+      padding: 8px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: 1px solid #7b2fbe;
+      box-shadow: 
+        0 6px 0 #0b1a2f,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 -3px 0 #0b1a2f,
+        inset 0 2px 4px rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+      text-shadow: 0 2px 0 #0b1a2f;
+      letter-spacing: 0.5px;
+      transition: all 0.1s ease;
+      white-space: nowrap;
+    }
+    .exam-header .progress-badge:active {
+      transform: translateY(3px);
+      box-shadow: 
+        0 3px 0 #0b1a2f,
+        0 6px 12px rgba(0,0,0,0.3),
+        inset 0 -1px 0 #0b1a2f;
+    }
+    .exam-header .progress-badge.welcome-badge {
+      background: linear-gradient(145deg, #2a5a7a, #1a3a5a);
+      color: #f5d742;
+      border-color: #f5d742;
+      box-shadow: 
+        0 6px 0 #0b1a2f,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 -3px 0 #0b1a2f,
+        inset 0 2px 4px rgba(255,255,255,0.1),
+        0 0 15px rgba(245, 215, 66, 0.2);
+    }
+
+    .question-card {
+      background: #112b44;
+      border-radius: 24px;
+      padding: 20px 22px 16px;
+      margin: 8px 0 14px;
+      box-shadow: inset 0 2px 6px #00000066, 0 8px 12px #00000033;
+      border: 1px solid #7b2fbe66;
+    }
+
+    /* ===== WELCOME SCREEN ===== */
+    .welcome-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .welcome-screen .welcome-icon {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+    .welcome-screen h2 {
+      color: #f5d742;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 4px #00000055;
+    }
+    .welcome-screen p {
+      color: #e8f0fe;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+    .welcome-screen .name-input-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      max-width: 400px;
+    }
+    .welcome-screen .name-input-group input {
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 60px;
+      border: 2px solid #7b2fbe;
+      background: #0d233d;
+      color: #f0f7ff;
+      font-size: 1.2rem;
+      font-weight: 500;
+      outline: none;
+      transition: all 0.3s;
+      text-align: center;
+      box-shadow: 0 4px 0 #0b1a2f, inset 0 2px 4px rgba(255,255,255,0.05);
+    }
+    .welcome-screen .name-input-group input:focus {
+      border-color: #f5d742;
+      box-shadow: 0 0 0 3px #f5d74244, 0 4px 0 #0b1a2f;
+    }
+    .welcome-screen .name-input-group input::placeholder {
+      color: #6a8aa8;
+      font-weight: 400;
+    }
+    .welcome-screen .mode-selector {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 8px 0 4px;
+      width: 100%;
+    }
+    .welcome-screen .mode-selector .mode-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 16px 24px;
+      border-radius: 60px;
+      border: 2px solid #7b2fbe;
+      background: #0d233d;
+      color: #b6d0e8;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.1s ease;
+      text-align: center;
+      touch-action: manipulation;
+      user-select: none;
+      position: relative;
+      transform: translateY(-3px);
+      box-shadow: 
+        0 6px 0 #0b1a2f,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.05),
+        inset 0 -3px 0 #0b1a2f;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .welcome-screen .mode-selector .mode-btn:hover {
+      background: #1a3a5a;
+      border-color: #9b4fd4;
+      transform: translateY(-3px) scale(1.01);
+    }
+    .welcome-screen .mode-selector .mode-btn:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0 #0b1a2f,
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.05),
+        inset 0 -1px 0 #0b1a2f;
+    }
+    .welcome-screen .mode-selector .mode-btn.active {
+      background: #2a5a7a;
+      border-color: #f5d742;
+      color: #f5d742;
+      box-shadow: 
+        0 6px 0 #0b1a2f,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.1),
+        inset 0 -3px 0 #0b1a2f,
+        0 0 0 2px #f5d74244;
+    }
+    .welcome-screen .mode-selector .mode-btn .mode-icon {
+      display: block;
+      font-size: 1.8rem;
+      margin-bottom: 4px;
+    }
+    .welcome-screen .mode-selector .mode-btn .mode-label {
+      display: block;
+      font-size: 0.9rem;
+    }
+    .welcome-screen .mode-description {
+      color: #b6d0e8;
+      font-size: 0.95rem;
+      margin: 4px 0 8px;
+      min-height: 28px;
+      opacity: 0.8;
+    }
+    .welcome-screen .name-input-group .btn-start {
+      min-width: 200px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 16px;
+      padding: 14px 28px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #ffffff;
+      transition: all 0.1s ease;
+      cursor: pointer;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 52px;
+      justify-content: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      position: relative;
+      transform: translateY(-3px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn:active {
+      transform: translateY(2px);
+    }
+    .btn-start {
+      background: linear-gradient(145deg, #3a9a5a, #2a7a4a);
+      color: #ffffff;
+      box-shadow: 
+        0 6px 0 #1a5a2e,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -3px 0 #124d24;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      font-size: 1.3rem;
+      padding: 18px 48px;
+    }
+    .btn-start:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0 #1a5a2e,
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.15),
+        inset 0 -1px 0 #124d24;
+    }
+    .btn-success {
+      background: linear-gradient(145deg, #3a9a5a, #2a7a4a);
+      color: #ffffff;
+      box-shadow: 
+        0 6px 0 #1a5a2e,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -3px 0 #124d24;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .btn-success:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0 #1a5a2e,
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.15),
+        inset 0 -1px 0 #124d24;
+    }
+    .btn-danger {
+      background: linear-gradient(145deg, #3a7aaa, #2a5a8a);
+      color: #ffffff;
+      box-shadow: 
+        0 6px 0 #1a4a6a,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -3px 0 #123a5a;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .btn-danger:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0 #1a4a6a,
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.15),
+        inset 0 -1px 0 #123a5a;
+    }
+    .btn-warning {
+      background: linear-gradient(145deg, #d4961a, #b8860b);
+      color: #ffffff;
+      box-shadow: 
+        0 6px 0 #6b4f0a,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -3px 0 #4a3506;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .btn-warning:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0 #6b4f0a,
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.15),
+        inset 0 -1px 0 #4a3506;
+    }
+    .btn-primary {
+      background: linear-gradient(145deg, #f5d742, #d4b830);
+      color: #0b1a2f;
+      box-shadow: 
+        0 6px 0 #a77d1a,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.3),
+        inset 0 -3px 0 #8a6615;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    }
+    .btn-primary:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0 #a77d1a,
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.2),
+        inset 0 -1px 0 #8a6615;
+    }
+    .btn-secondary {
+      background: linear-gradient(145deg, #f5d742, #d4b830);
+      color: #0b1a2f;
+      box-shadow: 
+        0 6px 0 #a77d1a,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.3),
+        inset 0 -3px 0 #8a6615;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    }
+    .btn-secondary:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0 #a77d1a,
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.2),
+        inset 0 -1px 0 #8a6615;
+    }
+    .btn-secondary:disabled {
+      opacity: 0.5;
+      transform: translateY(0px);
+      box-shadow: 
+        0 2px 0 #a77d1a,
+        0 4px 8px rgba(0,0,0,0.2);
+      cursor: not-allowed;
+    }
+    .btn-exam {
+      background: linear-gradient(145deg, #3a7aaa, #2a5a8a);
+      color: #ffffff;
+      box-shadow: 
+        0 6px 0 #1a4a6a,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -3px 0 #123a5a;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .btn-exam:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0 #1a4a6a,
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.15),
+        inset 0 -1px 0 #123a5a;
+    }
+
+    .footer {
+      margin-top: 20px;
+      border-top: 1px solid #7b2fbe66;
+      padding-top: 14px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      color: #000000;
+      font-size: 1rem;
+      font-weight: 700;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+      text-align: center;
+    }
+    .footer .rights {
+      color: #000000;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== HIDE CONTENT ===== */
+    .hidden-content {
+      display: none !important;
+    }
+    .active-content {
+      display: block !important;
+    }
+
+    /* ===== TEST MODE STYLES ===== */
+    .question-number {
+      color: #f5d742;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      padding-left: 4px;
+      text-shadow: 0 2px 4px #00000055;
+      letter-spacing: 0.5px;
+    }
+    .question-text {
+      color: #f0f7ff;
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      padding-left: 6px;
+      border-left: 6px solid #7b2fbe;
+      padding-left: 16px;
+    }
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .option-item {
+      background: #1b3753;
+      border-radius: 50px;
+      padding: 12px 18px;
+      color: #e8f0fe;
+      font-size: 1.05rem;
+      font-weight: 500;
+      border: 2px solid #4a2a6a;
+      cursor: pointer;
+      transition: all 0.15s;
+      box-shadow: 0 3px 0 #0b1a2f;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      user-select: none;
+    }
+    .option-item:hover:not(.submitted) {
+      background: #264e72;
+      border-color: #9b4fd4;
+      transform: scale(1.01);
+    }
+    .option-item:active:not(.submitted) {
+      transform: scale(0.98);
+    }
+    .option-item.selected {
+      background: #2a5a7a;
+      border-color: #9b4fd4;
+      box-shadow: 0 0 0 2px #9b4fd488;
+    }
+    .option-item.selected-correct {
+      background: #1f6d3b;
+      border-color: #b3e6b3;
+      color: white;
+      box-shadow: 0 0 0 2px #b3e6b3;
+    }
+    .option-item.selected-wrong {
+      background: #7a2e3a;
+      border-color: #ff9e9e;
+      color: white;
+      box-shadow: 0 0 0 2px #ff9e9e;
+    }
+    .option-item.submitted {
+      cursor: default;
+      opacity: 0.85;
+    }
+    .option-item .letter {
+      background: #f5d742;
+      border-radius: 40px;
+      padding: 0 14px;
+      font-weight: 700;
+      color: #0b1a2f;
+      font-size: 1.1rem;
+      min-width: 30px;
+      text-align: center;
+      flex-shrink: 0;
+      box-shadow: inset 0 -2px 0 #b8941a;
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 6px 0 10px;
+      justify-content: center;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      align-items: center;
+    }
+
+    .analysis-panel {
+      background: #0d233d;
+      border-radius: 24px;
+      padding: 18px 20px;
+      margin: 14px 0 12px;
+      border-left: 6px solid #7b2fbe;
+      color: #e6f0fa;
+      box-shadow: inset 0 0 0 1px #7b2fbe66;
+    }
+    .analysis-panel h4 {
+      color: #f5d742;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .analysis-step {
+      background: #132d47;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin: 8px 0;
+      border-left: 4px solid #7b2fbe66;
+    }
+    .analysis-step strong {
+      color: #f5e56b;
+      font-weight: 700;
+      display: inline-block;
+      min-width: 100px;
+      font-size: 1.05rem;
+    }
+    .analysis-step .step-text {
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: #f0f7ff;
+      margin-top: 4px;
+    }
+    .analysis-step .ref {
+      background: #1e3f5b;
+      padding: 2px 14px;
+      border-radius: 30px;
+      color: #c9def5;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-top: 6px;
+      border: 1px solid #7b2fbe44;
+    }
+    .key-hint {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      margin-left: 4px;
+    }
+
+    .mistake-list {
+      background: #1a2f47;
+      border-radius: 16px;
+      padding: 10px 16px;
+      margin: 10px 0;
+      max-height: 200px;
+      overflow-y: auto;
+      color: #f0f7ff;
+      border: 1px solid #7b2fbe44;
+      -webkit-overflow-scrolling: touch;
+    }
+    .mistake-item {
+      padding: 6px 8px;
+      border-bottom: 1px solid #7b2fbe33;
+      font-size: 0.95rem;
+    }
+    .mistake-item .correct-answer {
+      color: #a3e0a3;
+      font-weight: 700;
+    }
+
+    #examResultArea {
+      border: 1px solid #7b2fbe66;
+      background: #0d233d;
+      border-radius: 24px;
+      padding: 16px 18px;
+      margin-top: 14px;
+    }
+    #examResultArea h3 {
+      color: #f5d742;
+      font-size: 1.4rem;
+    }
+
+    /* ===== PERFORMANCE RATING STYLES ===== */
+    .performance-rating {
+      padding: 16px 20px;
+      border-radius: 20px;
+      margin: 12px 0;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      border: 2px solid transparent;
+    }
+    .performance-rating .rating-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .performance-rating .rating-label {
+      font-size: 1.4rem;
+    }
+    .performance-rating .rating-sub {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-top: 4px;
+      opacity: 0.9;
+    }
+    .rating-perfect {
+      background: linear-gradient(145deg, #1a5a2e, #0d3d1e);
+      color: #a3e0a3;
+      border-color: #a3e0a3;
+    }
+    .rating-excellent {
+      background: linear-gradient(145deg, #1a4a6a, #0d2d4a);
+      color: #7ec8e3;
+      border-color: #7ec8e3;
+    }
+    .rating-good {
+      background: linear-gradient(145deg, #4a4a1a, #2d2d0d);
+      color: #e3d47e;
+      border-color: #e3d47e;
+    }
+    .rating-passed {
+      background: linear-gradient(145deg, #3a6a1a, #1a3a0d);
+      color: #8cc87e;
+      border-color: #8cc87e;
+    }
+    .rating-failed {
+      background: linear-gradient(145deg, #6a2a2a, #3d0d0d);
+      color: #e37e7e;
+      border-color: #e37e7e;
+    }
+
+    .pass-status {
+      display: inline-block;
+      padding: 4px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-top: 6px;
+    }
+    .pass-status.passed {
+      background: #1f5d3b;
+      color: #a3e0a3;
+      border: 1px solid #a3e0a3;
+    }
+    .pass-status.failed {
+      background: #5d2a2a;
+      color: #e3a0a0;
+      border: 1px solid #e3a0a0;
+    }
+
+    /* ===== POPUP ===== */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .popup-overlay.active {
+      display: flex;
+    }
+    .popup-content {
+      background: linear-gradient(145deg, #1a3a5a, #0d233d);
+      border-radius: 32px;
+      padding: 40px 48px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      border: 2px solid #f5d742;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px #7b2fbe inset;
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .popup-content .popup-icon {
+      font-size: 4.5rem;
+      margin-bottom: 10px;
+    }
+    .popup-content h2 {
+      color: #f5d742;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 4px #00000055;
+    }
+    .popup-content p {
+      color: #e8f0fe;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+    .popup-content .score-display {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #a3e0a3;
+      margin: 12px 0;
+      text-shadow: 0 2px 8px rgba(163, 224, 163, 0.3);
+    }
+    .popup-content .score-display .total {
+      color: #f5d742;
+    }
+    .popup-content .popup-rating {
+      font-size: 1.4rem;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 30px;
+      display: inline-block;
+      margin: 8px 0;
+    }
+    .btn-finish {
+      background: linear-gradient(145deg, #f5d742, #d4b830);
+      color: #0b1a2f;
+      box-shadow: 
+        0 6px 0 #a77d1a,
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.3),
+        inset 0 -3px 0 #8a6615;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+      font-size: 1.2rem;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.1s ease;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 52px;
+      justify-content: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      transform: translateY(-3px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn-finish:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0 #a77d1a,
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.2),
+        inset 0 -1px 0 #8a6615;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ===== MOBILE AUDIO OVERLAY ===== */
+    #audioOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    #audioOverlay.show {
+      display: flex;
+    }
+    #audioOverlay .overlay-content {
+      background: linear-gradient(145deg, #1a3a5a, #0d233d);
+      padding: 40px 30px;
+      border-radius: 32px;
+      max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      border: 2px solid #f5d742;
+    }
+    #audioOverlay .overlay-icon {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+    #audioOverlay h3 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      color: #f5d742;
+    }
+    #audioOverlay p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      line-height: 1.6;
+      color: #e8f0fe;
+    }
+    #audioOverlay .enable-btn {
+      margin-top: 20px;
+      background: #f5d742;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 30px;
+      font-weight: 700;
+      color: #0b1a2f;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 0 #c9a820;
+      touch-action: manipulation;
+      border: 1px solid #e8c83a;
+    }
+    #audioOverlay .enable-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #c9a820;
+    }
+
+    /* ===== REVIEW MODE IDIOM NUMBER ===== */
+    .review-idiom-number {
+      color: #b6d0e8;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 6px;
+      background: #0d233d;
+      padding: 4px 16px;
+      border-radius: 30px;
+      display: inline-block;
+      border: 1px solid #7b2fbe44;
+    }
+
+    /* ===== AUDIO PLAYING LOCK INDICATOR ===== */
+    .audio-playing-indicator {
+      display: none;
+      color: #f5d742;
+      font-size: 0.8rem;
+      background: #0d233d;
+      padding: 2px 14px;
+      border-radius: 30px;
+      border: 1px solid #f5d742;
+      animation: pulse-glow 1s ease-in-out infinite;
+      margin-left: 8px;
+    }
+    .audio-playing-indicator.active {
+      display: inline-block;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; box-shadow: 0 0 5px #f5d742; }
+      50% { opacity: 0.6; box-shadow: 0 0 15px #f5d742; }
+    }
+
+    .nav-btn.audio-locked {
+      opacity: 0.4 !important;
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+    }
+
+    /* ===== IMAGE ZOOM - CURSOR STYLES ===== */
+    .image-wrapper img.zoomable {
+      cursor: grab;
+    }
+    .image-wrapper img.zoomable:active {
+      cursor: grabbing;
+    }
+    .image-wrapper img.zoomed {
+      cursor: grab;
+    }
+    .image-wrapper img.zoomed:active {
+      cursor: grabbing;
+    }
+
+    /* ===== TOUCH DRAG INDICATOR ===== */
+    .image-wrapper.touch-dragging {
+      cursor: grabbing !important;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .app-wrapper {
+        padding: 14px 16px 12px;
+        border-radius: 24px 24px 18px 18px;
+      }
+      .exam-header h1 {
+        font-size: 1.2rem;
+      }
+      .exam-header .progress-badge {
+        font-size: 1rem;
+        padding: 6px 14px;
+        border-radius: 12px;
+      }
+      .question-card {
+        padding: 16px 16px 14px;
+        border-radius: 18px;
+      }
+      .question-number {
+        font-size: 1.4rem;
+      }
+      .question-text {
+        font-size: 1.1rem;
+        padding-left: 12px;
+        border-left-width: 5px;
+      }
+      .option-item {
+        padding: 10px 14px;
+        font-size: 0.95rem;
+        border-radius: 40px;
+      }
+      .option-item .letter {
+        font-size: 0.95rem;
+        min-width: 26px;
+        padding: 0 10px;
+      }
+      .btn {
+        padding: 12px 18px;
+        font-size: 0.95rem;
+        min-height: 44px;
+        border-radius: 14px;
+      }
+      .welcome-screen h2 {
+        font-size: 1.8rem;
+      }
+      .welcome-screen .mode-selector .mode-btn {
+        min-width: 100px;
+        padding: 12px 16px;
+        font-size: 1rem;
+        box-shadow: 
+          0 4px 0 #0b1a2f,
+          0 6px 12px rgba(0,0,0,0.3),
+          inset 0 1px 3px rgba(255,255,255,0.05),
+          inset 0 -2px 0 #0b1a2f;
+        transform: translateY(-2px);
+      }
+      .welcome-screen .mode-selector .mode-btn:active {
+        transform: translateY(2px);
+        box-shadow: 
+          0 2px 0 #0b1a2f,
+          0 3px 6px rgba(0,0,0,0.3),
+          inset 0 1px 2px rgba(255,255,255,0.05),
+          inset 0 -1px 0 #0b1a2f;
+      }
+      .welcome-screen .mode-selector .mode-btn .mode-icon {
+        font-size: 1.4rem;
+      }
+      .popup-content {
+        padding: 30px 24px;
+      }
+      .popup-content h2 {
+        font-size: 1.6rem;
+      }
+      .popup-content .score-display {
+        font-size: 2.4rem;
+      }
+      .performance-rating {
+        font-size: 1.3rem;
+        padding: 12px 16px;
+      }
+      .performance-rating .rating-icon {
+        font-size: 2.4rem;
+      }
+      .performance-rating .rating-label {
+        font-size: 1.2rem;
+      }
+      .audio-playing-indicator {
+        font-size: 0.7rem;
+        padding: 1px 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 6px;
+      }
+      .app-wrapper {
+        padding: 10px 10px 10px;
+        border-radius: 18px 18px 14px 14px;
+      }
+      .exam-header h1 {
+        font-size: 1rem;
+      }
+      .exam-header .progress-badge {
+        font-size: 0.85rem;
+        padding: 4px 12px;
+        border-radius: 10px;
+      }
+      .question-card {
+        padding: 12px 12px 12px;
+        border-radius: 14px;
+      }
+      .question-number {
+        font-size: 1.2rem;
+      }
+      .question-text {
+        font-size: 0.95rem;
+        padding-left: 10px;
+        border-left-width: 4px;
+        margin-bottom: 12px;
+      }
+      .options-grid {
+        gap: 8px;
+      }
+      .option-item {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        border-radius: 30px;
+        gap: 8px;
+        border-width: 1.5px;
+        box-shadow: 0 2px 0 #0b1a2f;
+      }
+      .option-item .letter {
+        font-size: 0.8rem;
+        min-width: 22px;
+        padding: 0 8px;
+        border-radius: 30px;
+      }
+      .btn-row .btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        min-height: 38px;
+        min-width: 70px;
+        border-radius: 12px;
+      }
+      .btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        min-height: 38px;
+        border-radius: 12px;
+      }
+      .btn-group .btn {
+        padding: 8px 10px;
+        font-size: 0.75rem;
+        min-height: 34px;
+        min-width: 60px;
+        border-radius: 10px;
+      }
+      .footer {
+        font-size: 0.7rem;
+      }
+      .welcome-screen h2 {
+        font-size: 1.4rem;
+      }
+      .welcome-screen .mode-selector {
+        flex-direction: column;
+        align-items: center;
+      }
+      .welcome-screen .mode-selector .mode-btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        box-shadow: 
+          0 3px 0 #0b1a2f,
+          0 4px 8px rgba(0,0,0,0.3),
+          inset 0 1px 2px rgba(255,255,255,0.05),
+          inset 0 -2px 0 #0b1a2f;
+        transform: translateY(-1.5px);
+      }
+      .welcome-screen .mode-selector .mode-btn:active {
+        transform: translateY(2px);
+        box-shadow: 
+          0 1px 0 #0b1a2f,
+          0 2px 4px rgba(0,0,0,0.3),
+          inset 0 1px 2px rgba(255,255,255,0.05),
+          inset 0 -1px 0 #0b1a2f;
+      }
+      .welcome-screen .mode-selector .mode-btn .mode-icon {
+        font-size: 1.2rem;
+      }
+      .btn-start {
+        font-size: 1rem;
+        padding: 12px 28px;
+        min-height: 44px;
+      }
+      .popup-content {
+        padding: 24px 16px;
+      }
+      .popup-content h2 {
+        font-size: 1.3rem;
+      }
+      .popup-content .score-display {
+        font-size: 2rem;
+      }
+      .popup-content .popup-icon {
+        font-size: 3.5rem;
+      }
+      .btn-finish {
+        font-size: 0.9rem;
+        padding: 12px 24px;
+        min-height: 40px;
+      }
+      .key-hint {
+        display: none;
+      }
+      .analysis-step strong {
+        font-size: 0.85rem;
+        min-width: 70px;
+        display: block;
+      }
+      .analysis-step .step-text {
+        font-size: 0.85rem;
+      }
+      .mistake-item {
+        font-size: 0.75rem;
+        padding: 3px 4px;
+      }
+      #examResultArea h3 {
+        font-size: 1rem;
+      }
+      .mistake-list {
+        max-height: 120px;
+        padding: 6px 10px;
+        border-radius: 12px;
+      }
+      .performance-rating {
+        font-size: 1.1rem;
+        padding: 10px 12px;
+      }
+      .performance-rating .rating-icon {
+        font-size: 2rem;
+      }
+      .performance-rating .rating-label {
+        font-size: 1rem;
+      }
+      .performance-rating .rating-sub {
+        font-size: 0.8rem;
+      }
+      .pass-status {
+        font-size: 0.9rem;
+        padding: 2px 14px;
+      }
+      #audioOverlay .overlay-content {
+        padding: 30px 20px;
+        margin: 20px;
+      }
+      #audioOverlay .overlay-icon {
+        font-size: 3rem;
+      }
+      #audioOverlay h3 {
+        font-size: 1.1rem;
+      }
+      #audioOverlay p {
+        font-size: 0.85rem;
+      }
+      #audioOverlay .enable-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+      .audio-playing-indicator {
+        font-size: 0.6rem;
+        padding: 1px 8px;
+        margin-left: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-wrapper" id="app">
+  <!-- HEADER -->
+  <div class="exam-header">
+    <h1>📘 IDIOM·BOOK·VOL.4</h1>
+    <div class="progress-badge welcome-badge" id="progressBadge">📚 Ready</div>
+  </div>
+
+  <!-- ===== WELCOME SCREEN ===== -->
+  <div class="question-card" id="welcomeScreen">
+    <div class="welcome-screen">
+      <div class="welcome-icon">📚</div>
+      <h2>Welcome!</h2>
+      <p>Please enter your name and choose your mode.</p>
+      <div class="name-input-group">
+        <input type="text" id="userNameInput" placeholder="Enter your name..." maxlength="50" autofocus>
+        
+        <div class="mode-selector">
+          <button class="mode-btn active" data-mode="review" id="modeReview">
+            <span class="mode-icon">📖</span>
+            <span class="mode-label">Review First</span>
+          </button>
+          <button class="mode-btn" data-mode="test" id="modeTest">
+            <span class="mode-icon">📝</span>
+            <span class="mode-label">Take Test</span>
+          </button>
+        </div>
+        <div class="mode-description" id="modeDescription">📖 Browse all 50 idioms with images, audio, and context.</div>
+        
+        <button class="btn btn-start" id="startBtn">🚀 Start</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REVIEW MODE (FLIPBOOK) ===== -->
+  <div class="question-card hidden-content" id="reviewContainer">
+    <div id="reviewBookContent">
+      <!-- The flipbook will be injected here -->
+    </div>
+  </div>
+
+  <!-- ===== TEST MODE ===== -->
+  <div class="question-card hidden-content" id="testContainer">
+    <div class="question-number" id="questionNumber">Question #1</div>
+    <div class="question-text" id="questionText">What does the idiom mean?</div>
+    <div class="options-grid" id="optionsContainer"></div>
+
+    <div class="btn-row" id="btnRow">
+      <button class="btn btn-success" id="submitAnswerBtn">✅ Submit Answer</button>
+      <button class="btn btn-warning" id="resetBtn">🔄 Reset</button>
+    </div>
+
+    <div class="analysis-panel" id="analysisPanel" style="display: none;">
+      <h4>🔍 STEP-BY-STEP ANALYSIS <small>· CSE style</small></h4>
+      <div id="analysisContent"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-secondary" id="prevBtn" disabled>◀ PREV <span class="key-hint">[←]</span></button>
+      <button class="btn btn-primary" id="nextBtn">NEXT <span class="key-hint">[→]</span></button>
+    </div>
+  </div>
+
+  <div id="examResultArea" style="display: none;"></div>
+
+  <div class="footer">
+    <span class="rights">CSN - Christopher S. Naputo Reviewer: All Rights Reserved</span>
+  </div>
+</div>
+
+<!-- ===== MOBILE AUDIO OVERLAY ===== -->
+<div id="audioOverlay" class="show">
+  <div class="overlay-content">
+    <span class="overlay-icon">🔊</span>
+    <h3>Tap to Enable Audio</h3>
+    <p>Your browser requires a tap to activate text-to-speech. Tap the button below to enable audio for this app.</p>
+    <button class="enable-btn" onclick="enableAudioAndClose()">🔊 Enable Audio</button>
+  </div>
+</div>
+
+<!-- ===== CONGRATULATIONS POPUP ===== -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-content">
+    <div class="popup-icon">🎉</div>
+    <h2>Congratulations!</h2>
+    <p id="popupName">Hey, John!</p>
+    <p>You have completed the test!</p>
+    <div class="score-display">
+      <span id="popupScore">50</span><span class="total"> / 50</span>
+    </div>
+    <div id="popupRating" class="popup-rating" style="background: #1f5d3b; color: #a3e0a3;">⭐ PERFECT!</div>
+    <p style="font-size: 1rem; color: #b6d0e8; margin-top: 4px;">Passing Score: 40/50 (80%)</p>
+    <button class="btn-finish" id="finishBtn">🏆 View Results</button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ===== IDIOM DATA (50 items) with FULL TEXT for audio =====
+    const idioms = [
+      { id: 151, phrase: "IN THE RED", meaning: "Spending more money than you earn; having debt.", filename: "151. IN THE RED.png", context: "The company has been in the red for three consecutive quarters. The context shows a financial deficit or loss.", fullText: "In the red. Meaning: Spending more money than you earn; having debt. Example: The company has been in the red for three consecutive quarters. Think of it like this: Red ink indicates debt on financial statements. When to use: Use this when referring to financial loss or debt." },
+      { id: 152, phrase: "INSIDE TRACK", meaning: "An advantage or favorable position, often from having insider information.", filename: "152. INSIDE TRACK.png", context: "His connections gave him the inside track on the job opportunity. The context shows an advantage through insider knowledge.", fullText: "Inside track. Meaning: An advantage or favorable position, often from having insider information. Example: His connections gave him the inside track on the job opportunity. Think of it like this: The inner lane of a race track gives you a shorter distance. When to use: Use this when someone has an advantage." },
+      { id: 153, phrase: "IVORY TOWER", meaning: "An isolated, detached, and privileged position removed from the realities of life.", filename: "153. IVORY TOWER.png", context: "Academics often live in an ivory tower, disconnected from everyday problems. The context shows someone who is out of touch with reality.", fullText: "Ivory tower. Meaning: An isolated, detached, and privileged position removed from the realities of life. Example: Academics often live in an ivory tower, disconnected from everyday problems. Think of it like this: A tower made of ivory is luxurious but isolated. When to use: Use this when someone is out of touch with reality." },
+      { id: 154, phrase: "KEEP ONE'S NOSE CLEAN", meaning: "To stay out of trouble and avoid wrongdoing.", filename: "154. KEEP ONE'S NOSE CLEAN.png", context: "He kept his nose clean and stayed away from illegal activities. The context shows staying out of trouble.", fullText: "Keep one's nose clean. Meaning: To stay out of trouble and avoid wrongdoing. Example: He kept his nose clean and stayed away from illegal activities. Think of it like this: A clean nose is free from dirt, just like avoiding trouble. When to use: Use this when advising someone to stay out of trouble." },
+      { id: 155, phrase: "KEEP ONE'S POWDER DRY", meaning: "To be prepared and ready for action, especially in a challenging situation.", filename: "155. KEEP ONE'S POWDER DRY.png", context: "The general ordered the troops to keep their powder dry before the battle. The context shows being prepared for action.", fullText: "Keep one's powder dry. Meaning: To be prepared and ready for action, especially in a challenging situation. Example: The general ordered the troops to keep their powder dry before the battle. Think of it like this: Gunpowder must stay dry to be effective. When to use: Use this when encouraging preparedness." },
+      { id: 156, phrase: "LEVEL PLAYING FIELD", meaning: "A situation where everyone has an equal chance to succeed, without unfair advantages.", filename: "156. LEVEL PLAYING FIELD.png", context: "The new regulations create a level playing field for all competitors. The context shows a fair and equal competition.", fullText: "Level playing field. Meaning: A situation where everyone has an equal chance to succeed, without unfair advantages. Example: The new regulations create a level playing field for all competitors. Think of it like this: A flat field where no one has a height advantage. When to use: Use this when discussing fairness." },
+      { id: 157, phrase: "LION'S SHARE", meaning: "The largest or most significant part of something.", filename: "157. LION'S SHARE.png", context: "The CEO received the lion's share of the profits. The context shows someone receiving the largest portion.", fullText: "Lion's share. Meaning: The largest or most significant part of something. Example: The CEO received the lion's share of the profits. Think of it like this: The lion gets the biggest piece of the kill. When to use: Use this when someone gets the largest portion." },
+      { id: 158, phrase: "LOW-HANGING FRUIT", meaning: "The easiest and simplest tasks or goals that require the least effort.", filename: "158. LOW-HANGING FRUIT.png", context: "Let's focus on low-hanging fruit first to build momentum. The context shows prioritizing easy tasks.", fullText: "Low-hanging fruit. Meaning: The easiest and simplest tasks or goals that require the least effort. Example: Let's focus on low-hanging fruit first to build momentum. Think of it like this: Fruit that hangs low is easy to pick. When to use: Use this when prioritizing easy tasks." },
+      { id: 159, phrase: "MAKE OR BREAK", meaning: "A critical situation that will result in either great success or total failure.", filename: "159. MAKE OR BREAK.png", context: "This deal is make or break for the company's future. The context shows a critical moment that will decide everything.", fullText: "Make or break. Meaning: A critical situation that will result in either great success or total failure. Example: This deal is make or break for the company's future. Think of it like this: Everything will be made or broken at this moment. When to use: Use this when a situation is critical." },
+      { id: 160, phrase: "MONEY TALKS", meaning: "Money gives you power and influence; financial resources can get things done.", filename: "160. MONEY TALKS.png", context: "If you want to get things done quickly, remember that money talks. The context shows the power of money.", fullText: "Money talks. Meaning: Money gives you power and influence; financial resources can get things done. Example: If you want to get things done quickly, remember that money talks. Think of it like this: Money has a voice that people listen to. When to use: Use this when emphasizing the power of money." },
+      { id: 161, phrase: "MOVERS AND SHAKERS", meaning: "People with power and influence who make things happen.", filename: "161. MOVERS AND SHAKERS.png", context: "The meeting was attended by all the movers and shakers in the tech industry. The context shows powerful and influential people.", fullText: "Movers and shakers. Meaning: People with power and influence who make things happen. Example: The meeting was attended by all the movers and shakers in the tech industry. Think of it like this: People who move things and shake things up—they make a difference. When to use: Use this when referring to influential people." },
+      { id: 162, phrase: "NECK AND NECK", meaning: "Very close in a competition; evenly matched.", filename: "162. NECK AND NECK.png", context: "The two candidates were neck and neck in the polls. The context shows a very close competition.", fullText: "Neck and neck. Meaning: Very close in a competition; evenly matched. Example: The two candidates were neck and neck in the polls. Think of it like this: Two horses running side by side with their necks aligned. When to use: Use this when a competition is very close." },
+      { id: 163, phrase: "NO STRINGS ATTACHED", meaning: "Without conditions or obligations; free and clear.", filename: "163. NO STRINGS ATTACHED.png", context: "The scholarship came with no strings attached. The context shows something given without conditions.", fullText: "No strings attached. Meaning: Without conditions or obligations; free and clear. Example: The scholarship came with no strings attached. Think of it like this: A gift with no strings tied to it—completely free. When to use: Use this when something is given freely." },
+      { id: 164, phrase: "OFF THE RECORD", meaning: "Information shared in confidence, not meant to be quoted or reported publicly.", filename: "164. OFF THE RECORD.png", context: "The politician spoke off the record to the journalist. The context shows confidential information not for publication.", fullText: "Off the record. Meaning: Information shared in confidence, not meant to be quoted or reported publicly. Example: The politician spoke off the record to the journalist. Think of it like this: Not recorded officially—just between us. When to use: Use this when speaking confidentially." },
+      { id: 165, phrase: "ON THE SAME PAGE", meaning: "In agreement; having the same understanding of a situation.", filename: "165. ON THE SAME PAGE.png", context: "Before we proceed, let's make sure we're on the same page. The context shows agreement and shared understanding.", fullText: "On the same page. Meaning: In agreement; having the same understanding of a situation. Example: Before we proceed, let's make sure we're on the same page. Think of it like this: Reading the same page of a book so you have the same information. When to use: Use this when ensuring everyone agrees." },
+      { id: 166, phrase: "OUT OF POCKET", meaning: "Money paid directly from one's own funds; or unavailable or unreachable.", filename: "166. OUT OF POCKET.png", context: "She paid for the repairs out of pocket because insurance didn't cover it. The context shows paying with one's own money.", fullText: "Out of pocket. Meaning: Money paid directly from one's own funds; or unavailable or unreachable. Example: She paid for the repairs out of pocket because insurance didn't cover it. Think of it like this: The money comes from your pocket, not someone else's. When to use: Use this when paying with your own money." },
+      { id: 167, phrase: "PAY DIVIDENDS", meaning: "To produce positive results or benefits over time.", filename: "167. PAY DIVIDENDS.png", context: "Investing in employee training pays dividends in higher productivity. The context shows long-term benefits from an investment.", fullText: "Pay dividends. Meaning: To produce positive results or benefits over time. Example: Investing in employee training pays dividends in higher productivity. Think of it like this: Like financial dividends, the rewards come over time. When to use: Use this when an investment yields long-term benefits." },
+      { id: 168, phrase: "PINK SLIP", meaning: "A notice of termination from employment; a layoff notice.", filename: "168. PINK SLIP.png", context: "He got his pink slip after the company announced layoffs. The context shows a termination notice.", fullText: "Pink slip. Meaning: A notice of termination from employment; a layoff notice. Example: He got his pink slip after the company announced layoffs. Think of it like this: Historically, termination notices were printed on pink paper. When to use: Use this when referring to being fired or laid off." },
+      { id: 169, phrase: "PLAYING FIELD", meaning: "The competitive environment or conditions in which a business or activity operates.", filename: "169. PLAYING FIELD.png", context: "The new law aims to level the playing field for small businesses. The context shows the competitive environment.", fullText: "Playing field. Meaning: The competitive environment or conditions in which a business or activity operates. Example: The new law aims to level the playing field for small businesses. Think of it like this: The field where the game is played. When to use: Use this when discussing competition." },
+      { id: 170, phrase: "POWER LUNCH", meaning: "A business lunch where important decisions are made and networking occurs.", filename: "170. POWER LUNCH.png", context: "The deal was finalized during a power lunch between the two CEOs. The context shows a business lunch for decision-making.", fullText: "Power lunch. Meaning: A business lunch where important decisions are made and networking occurs. Example: The deal was finalized during a power lunch between the two CEOs. Think of it like this: A lunch that has the power to make things happen. When to use: Use this when referring to business lunches." },
+      { id: 171, phrase: "PULL RANK", meaning: "To use one's higher position or authority to get special treatment.", filename: "171. PULL RANK.png", context: "The manager pulled rank to get the best office space. The context shows using authority for personal advantage.", fullText: "Pull rank. Meaning: To use one's higher position or authority to get special treatment. Example: The manager pulled rank to get the best office space. Think of it like this: You pull the rank card to get what you want. When to use: Use this when someone abuses their authority." },
+      { id: 172, phrase: "RAT RACE", meaning: "A competitive and stressful work environment where people constantly strive for success.", filename: "172. RAT RACE.png", context: "After years in the rat race, he decided to start his own business. The context shows a stressful and competitive work life.", fullText: "Rat race. Meaning: A competitive and stressful work environment where people constantly strive for success. Example: After years in the rat race, he decided to start his own business. Think of it like this: Rats racing endlessly for a reward. When to use: Use this when describing a stressful work environment." },
+      { id: 173, phrase: "READ THE FINE PRINT", meaning: "To carefully examine all the details and terms of a contract or agreement.", filename: "173. READ THE FINE PRINT.png", context: "Before signing, make sure you read the fine print of the contract. The context shows examining contract details carefully.", fullText: "Read the fine print. Meaning: To carefully examine all the details and terms of a contract or agreement. Example: Before signing, make sure you read the fine print of the contract. Think of it like this: Important details are often in small print. When to use: Use this when warning someone to review terms carefully." },
+      { id: 174, phrase: "RED TAPE", meaning: "Excessive bureaucracy and paperwork that delays progress.", filename: "174. RED TAPE.png", context: "The project was delayed due to government red tape. The context shows bureaucracy causing delays.", fullText: "Red tape. Meaning: Excessive bureaucracy and paperwork that delays progress. Example: The project was delayed due to government red tape. Think of it like this: Historically, official documents were tied with red tape. When to use: Use this when referring to bureaucratic delays." },
+      { id: 175, phrase: "RIDE OUT THE STORM", meaning: "To survive a difficult period without giving up.", filename: "175. RIDE OUT THE STORM.png", context: "The company is trying to ride out the storm of the economic downturn. The context shows surviving a difficult period.", fullText: "Ride out the storm. Meaning: To survive a difficult period without giving up. Example: The company is trying to ride out the storm of the economic downturn. Think of it like this: A ship riding out a storm safely. When to use: Use this when surviving tough times." },
+      { id: 176, phrase: "RUN A TIGHT SHIP", meaning: "To manage a business or organization with strict discipline and efficiency.", filename: "176. RUN A TIGHT SHIP.png", context: "The new manager runs a tight ship, ensuring everything is organized. The context shows efficient and strict management.", fullText: "Run a tight ship. Meaning: To manage a business or organization with strict discipline and efficiency. Example: The new manager runs a tight ship, ensuring everything is organized. Think of it like this: A ship with everything in its proper place. When to use: Use this when describing efficient management." },
+      { id: 177, phrase: "SACRED COW", meaning: "A belief, custom, or institution that is treated with excessive reverence.", filename: "177. SACRED COW.png", context: "The CEO's ideas are treated as sacred cows in the company. The context shows something that is unquestionably accepted.", fullText: "Sacred cow. Meaning: A belief, custom, or institution that is treated with excessive reverence. Example: The CEO's ideas are treated as sacred cows in the company. Think of it like this: In some cultures, cows are sacred and cannot be questioned. When to use: Use this when referring to unquestioned beliefs." },
+      { id: 178, phrase: "SEAL THE DEAL", meaning: "To finalize or close a business agreement or deal.", filename: "178. SEAL THE DEAL.png", context: "A handshake was enough to seal the deal. The context shows finalizing an agreement.", fullText: "Seal the deal. Meaning: To finalize or close a business agreement or deal. Example: A handshake was enough to seal the deal. Think of it like this: Sealing a letter with wax to make it official. When to use: Use this when finalizing an agreement." },
+      { id: 179, phrase: "SELL LIKE HOTCAKES", meaning: "To sell very quickly and in large quantities.", filename: "179. SELL LIKE HOTCAKES.png", context: "The new product is selling like hotcakes in stores. The context shows something selling rapidly.", fullText: "Sell like hotcakes. Meaning: To sell very quickly and in large quantities. Example: The new product is selling like hotcakes in stores. Think of it like this: Hotcakes are popular and sell fast because they're delicious and cheap. When to use: Use this when something sells rapidly." },
+      { id: 180, phrase: "SLEEPING PARTNER", meaning: "A business partner who invests money but is not involved in daily operations.", filename: "180. SLEEPING PARTNER.png", context: "He became a sleeping partner, providing capital but not managing the business. The context shows a partner who is not active in operations.", fullText: "Sleeping partner. Meaning: A business partner who invests money but is not involved in daily operations. Example: He became a sleeping partner, providing capital but not managing the business. Think of it like this: A partner who sleeps while others work. When to use: Use this when referring to passive investors." },
+      { id: 181, phrase: "SILENT PARTNER", meaning: "A business partner who invests money but does not take part in management.", filename: "181. SILENT PARTNER.png", context: "She is a silent partner in the restaurant, letting her co-owner run it. The context shows a partner who is not involved in management.", fullText: "Silent partner. Meaning: A business partner who invests money but does not take part in management. Example: She is a silent partner in the restaurant, letting her co-owner run it. Think of it like this: A partner who is silent about daily operations. When to use: Use this when referring to investors." },
+      { id: 182, phrase: "SINK OR SWIM", meaning: "To fail or succeed by your own efforts; survival of the fittest.", filename: "182. SINK OR SWIM.png", context: "The new hires were thrown into the deep end—it was sink or swim. The context shows a situation where you either succeed or fail on your own.", fullText: "Sink or swim. Meaning: To fail or succeed by your own efforts; survival of the fittest. Example: The new hires were thrown into the deep end—it was sink or swim. Think of it like this: Either you learn to swim or you sink. When to use: Use this when someone is left to succeed or fail on their own." },
+      { id: 183, phrase: "STAND ONE'S GROUND", meaning: "To maintain one's position or opinion against opposition.", filename: "183. STAND ONE'S GROUND.png", context: "Despite the criticism, she stood her ground on the issue. The context shows maintaining a position despite opposition.", fullText: "Stand one's ground. Meaning: To maintain one's position or opinion against opposition. Example: Despite the criticism, she stood her ground on the issue. Think of it like this: Refusing to retreat or back down. When to use: Use this when someone holds their position." },
+      { id: 184, phrase: "STAY AHEAD OF THE CURVE", meaning: "To be more innovative and progressive than competitors or the current trends.", filename: "184. STAY AHEAD OF THE CURVE.png", context: "The company stays ahead of the curve by investing heavily in research. The context shows being progressive and innovative.", fullText: "Stay ahead of the curve. Meaning: To be more innovative and progressive than competitors or the current trends. Example: The company stays ahead of the curve by investing heavily in research. Think of it like this: Being ahead of the trend curve that others follow. When to use: Use this when describing innovation." },
+      { id: 185, phrase: "SWEATSHOP", meaning: "A workplace with poor conditions, low pay, and long hours.", filename: "185. SWEATSHOP.png", context: "The factory was exposed as a sweatshop, exploiting its workers. The context shows poor working conditions.", fullText: "Sweatshop. Meaning: A workplace with poor conditions, low pay, and long hours. Example: The factory was exposed as a sweatshop, exploiting its workers. Think of it like this: Workers sweat under harsh conditions. When to use: Use this when referring to exploitative workplaces." },
+      { id: 186, phrase: "SWEETEN THE DEAL", meaning: "To make an offer more attractive by adding incentives.", filename: "186. SWEETEN THE DEAL.png", context: "The seller added a free warranty to sweeten the deal. The context shows making an offer more attractive.", fullText: "Sweeten the deal. Meaning: To make an offer more attractive by adding incentives. Example: The seller added a free warranty to sweeten the deal. Think of it like this: Adding sugar to make something taste better. When to use: Use this when making an offer more attractive." },
+      { id: 187, phrase: "TAKE THE HEAT", meaning: "To accept criticism or blame for a mistake or problem.", filename: "187. TAKE THE HEAT.png", context: "He took the heat for the team's failure, even though he wasn't solely responsible. The context shows accepting blame.", fullText: "Take the heat. Meaning: To accept criticism or blame for a mistake or problem. Example: He took the heat for the team's failure, even though he wasn't solely responsible. Think of it like this: Standing in the heat while others stay cool. When to use: Use this when someone takes the blame." },
+      { id: 188, phrase: "THE BUCK STOPS HERE", meaning: "Taking full responsibility for decisions and actions.", filename: "188. THE BUCK STOPS HERE.png", context: "As the CEO, the buck stops here; I take full responsibility. The context shows accepting ultimate responsibility.", fullText: "The buck stops here. Meaning: Taking full responsibility for decisions and actions. Example: As the CEO, the buck stops here; I take full responsibility. Think of it like this: Passing the buck means passing responsibility—here it stops. When to use: Use this when accepting responsibility." },
+      { id: 189, phrase: "THE CUSTOMER IS ALWAYS RIGHT", meaning: "The customer's needs and satisfaction should be the top priority.", filename: "189. THE CUSTOMER IS ALWAYS RIGHT.png", context: "Our policy is that the customer is always right, even when we disagree. The context shows prioritizing customer satisfaction.", fullText: "The customer is always right. Meaning: The customer's needs and satisfaction should be the top priority. Example: Our policy is that the customer is always right, even when we disagree. Think of it like this: The customer pays, so their opinion matters most. When to use: Use this when emphasizing customer service." },
+      { id: 190, phrase: "THINK OUTSIDE THE BOX", meaning: "To think creatively and unconventionally; to find innovative solutions.", filename: "190. THINK OUTSIDE THE BOX.png", context: "We need to think outside the box to solve this problem. The context shows creative and unconventional thinking.", fullText: "Think outside the box. Meaning: To think creatively and unconventionally; to find innovative solutions. Example: We need to think outside the box to solve this problem. Think of it like this: Thinking beyond the conventional boundaries. When to use: Use this when encouraging creativity." },
+      { id: 191, phrase: "THROW MONEY AT SOMETHING", meaning: "To spend large amounts of money on a problem without necessarily solving it.", filename: "191. THROW MONEY AT SOMETHING.png", context: "The company tried to fix the issue by throwing money at it. The context shows spending money without solving the root problem.", fullText: "Throw money at something. Meaning: To spend large amounts of money on a problem without necessarily solving it. Example: The company tried to fix the issue by throwing money at it. Think of it like this: Tossing money in hopes it will fix things. When to use: Use this when money is spent without solving the problem." },
+      { id: 192, phrase: "TIME IS MONEY", meaning: "Time is valuable and wasting it costs money.", filename: "192. TIME IS MONEY.png", context: "We need to work efficiently because time is money. The context shows the value of time.", fullText: "Time is money. Meaning: Time is valuable and wasting it costs money. Example: We need to work efficiently because time is money. Think of it like this: Every minute wasted is money lost. When to use: Use this when emphasizing efficiency." },
+      { id: 193, phrase: "TURN A PROFIT", meaning: "To make a financial profit or gain.", filename: "193. TURN A PROFIT.png", context: "The business turned a profit in its second year of operation. The context shows making financial profit.", fullText: "Turn a profit. Meaning: To make a financial profit or gain. Example: The business turned a profit in its second year of operation. Think of it like this: A successful turn that results in profit. When to use: Use this when a business makes money." },
+      { id: 194, phrase: "TURN THE TABLES", meaning: "To reverse a situation, especially to gain an advantage.", filename: "194. TURN THE TABLES.png", context: "The underdog turned the tables and won the championship. The context shows reversing a situation to gain advantage.", fullText: "Turn the tables. Meaning: To reverse a situation, especially to gain an advantage. Example: The underdog turned the tables and won the championship. Think of it like this: Turning a table around so the sides are swapped. When to use: Use this when reversing a situation." },
+      { id: 195, phrase: "WHITE ELEPHANT", meaning: "A possession that is expensive and difficult to maintain but has little practical value.", filename: "195. WHITE ELEPHANT.png", context: "The mansion became a white elephant with its huge maintenance costs. The context shows an expensive burden that is not useful.", fullText: "White elephant. Meaning: A possession that is expensive and difficult to maintain but has little practical value. Example: The mansion became a white elephant with its huge maintenance costs. Think of it like this: In some cultures, white elephants were sacred but impractical. When to use: Use this when referring to an expensive burden." },
+      { id: 196, phrase: "WHITE KNIGHT", meaning: "A person or company that rescues another from financial trouble by making a generous offer.", filename: "196. WHITE KNIGHT.png", context: "A white knight investor saved the struggling company from bankruptcy. The context shows a person or company that rescues another.", fullText: "White knight. Meaning: A person or company that rescues another from financial trouble by making a generous offer. Example: A white knight investor saved the struggling company from bankruptcy. Think of it like this: A knight in shining armor rescuing someone. When to use: Use this when someone rescues a failing company." },
+      { id: 197, phrase: "WHITE-COLLAR", meaning: "Relating to professional, office-based work, often in administration or management.", filename: "197. WHITE-COLLAR.png", context: "White-collar workers typically wear business attire and work in offices. The context shows professional, office-based workers.", fullText: "White-collar. Meaning: Relating to professional, office-based work, often in administration or management. Example: White-collar workers typically wear business attire and work in offices. Think of it like this: Historically, office workers wore white collared shirts. When to use: Use this when referring to office professionals." },
+      { id: 198, phrase: "WINDOW DRESSING", meaning: "Superficial or misleading actions to make something look better than it is.", filename: "198. WINDOW DRESSING.png", context: "The company's annual report had a lot of window dressing to hide poor performance. The context shows superficial improvements to hide reality.", fullText: "Window dressing. Meaning: Superficial or misleading actions to make something look better than it is. Example: The company's annual report had a lot of window dressing to hide poor performance. Think of it like this: Decorating a store window to attract customers, even if the inside is messy. When to use: Use this when referring to superficial improvements." },
+      { id: 199, phrase: "WIN-WIN SITUATION", meaning: "A situation where all parties benefit or gain something positive.", filename: "199. WIN-WIN SITUATION.png", context: "The partnership created a win-win situation for both companies. The context shows a mutually beneficial arrangement.", fullText: "Win-win situation. Meaning: A situation where all parties benefit or gain something positive. Example: The partnership created a win-win situation for both companies. Think of it like this: Both sides win, so everyone is happy. When to use: Use this when everyone benefits." },
+      { id: 200, phrase: "WORK ONE'S WAY UP", meaning: "To advance through hard work and dedication, starting from a lower position.", filename: "200. WORK ONE'S WAY UP.png", context: "She started as a receptionist and worked her way up to CEO. The context shows advancing through hard work.", fullText: "Work one's way up. Meaning: To advance through hard work and dedication, starting from a lower position. Example: She started as a receptionist and worked her way up to CEO. Think of it like this: Climbing a ladder from the bottom to the top. When to use: Use this when someone advances through effort." }
+    ];
+
+    // ===== DOM REFS =====
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const reviewContainer = document.getElementById('reviewContainer');
+    const testContainer = document.getElementById('testContainer');
+    const userNameInput = document.getElementById('userNameInput');
+    const startBtn = document.getElementById('startBtn');
+    const modeReview = document.getElementById('modeReview');
+    const modeTest = document.getElementById('modeTest');
+    const modeDescription = document.getElementById('modeDescription');
+    const progressBadge = document.getElementById('progressBadge');
+    const examResultArea = document.getElementById('examResultArea');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupName = document.getElementById('popupName');
+    const popupScore = document.getElementById('popupScore');
+    const popupRating = document.getElementById('popupRating');
+    const finishBtn = document.getElementById('finishBtn');
+    const audioOverlay = document.getElementById('audioOverlay');
+
+    // Test mode refs
+    const questionNumber = document.getElementById('questionNumber');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const submitAnswerBtn = document.getElementById('submitAnswerBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const analysisPanel = document.getElementById('analysisPanel');
+    const analysisContent = document.getElementById('analysisContent');
+    const btnRow = document.getElementById('btnRow');
+
+    // ===== STATE =====
+    let selectedMode = 'review';
+    let userName = '';
+    let currentPage = 0;
+    let zoomLevel = 1;
+    let panX = 0;
+    let panY = 0;
+    let isDragging = false;
+    let startX = 0, startY = 0, startPanX = 0, startPanY = 0;
+    let currentImg = null;
+    let currentWrapper = null;
+    let speechSynth = window.speechSynthesis;
+    let currentUtterance = null;
+    let isPlaying = false;
+    let availableVoices = [];
+    let selectedVoiceName = 'Callum';
+    let isTouching = false;
+    let touchStartX = 0, touchStartY = 0, touchStartPanX = 0, touchStartPanY = 0;
+    let touchZoomStart = 0;
+    let audioEnabled = false;
+    let isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
+    let currentText = '';
+
+    // Test state
+    let currentIndex = 0;
+    let selectedOptionIndex = -1;
+    let userAnswers = new Array(idioms.length).fill(null);
+    let examSubmitted = false;
+    let examCompleted = false;
+
+    // ===== MOBILE AUDIO FUNCTIONS =====
+    function enableMobileAudio() {
+      try {
+        if (window.AudioContext || window.webkitAudioContext) {
+          const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+        }
+        
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+          const dummy = new SpeechSynthesisUtterance(' ');
+          dummy.volume = 0;
+          speechSynth.speak(dummy);
+          setTimeout(() => speechSynth.cancel(), 200);
+        }
+        
+        audioEnabled = true;
+      } catch(e) {
+        console.log('Audio activation error:', e);
+      }
+    }
+
+    window.enableAudioAndClose = function() {
+      enableMobileAudio();
+      if (audioOverlay) {
+        audioOverlay.classList.remove('show');
+        audioOverlay.style.display = 'none';
+      }
+      audioEnabled = true;
+    };
+
+    function checkMobileAudio() {
+      if (isMobile && audioOverlay) {
+        audioOverlay.classList.add('show');
+        audioOverlay.style.display = 'flex';
+        setTimeout(() => {
+          enableMobileAudio();
+        }, 300);
+      }
+    }
+
+    document.addEventListener('touchstart', function() {
+      if (!audioEnabled) {
+        enableMobileAudio();
+      }
+    }, { passive: true });
+
+    document.addEventListener('click', function() {
+      if (!audioEnabled) {
+        enableMobileAudio();
+      }
+    }, { passive: true });
+
+    // ===== PERFORMANCE RATING FUNCTION =====
+    function getPerformanceRating(score, total) {
+      const percentage = (score / total) * 100;
+      const passed = percentage >= 80;
+      
+      let rating = {};
+      
+      if (score === total) {
+        rating = {
+          label: '🌟 PERFECT!',
+          sub: 'Absolutely flawless! You are a true idiom master!',
+          cssClass: 'rating-perfect',
+          passed: true,
+          icon: '🏆'
+        };
+      } else if (percentage >= 90) {
+        rating = {
+          label: '⭐ EXCELLENT!',
+          sub: 'Outstanding performance! You really know your idioms well!',
+          cssClass: 'rating-excellent',
+          passed: true,
+          icon: '🌟'
+        };
+      } else if (percentage >= 80) {
+        rating = {
+          label: '👏 GOOD JOB!',
+          sub: 'You passed! Keep reviewing to achieve an even higher score!',
+          cssClass: 'rating-good',
+          passed: true,
+          icon: '💪'
+        };
+      } else if (percentage >= 60) {
+        rating = {
+          label: '📖 MORE PRACTICE NEEDED',
+          sub: 'You\'re getting there! Review the idioms and try again.',
+          cssClass: 'rating-passed',
+          passed: false,
+          icon: '📚'
+        };
+      } else {
+        rating = {
+          label: '📚 NEEDS IMPROVEMENT',
+          sub: 'Review the idioms carefully and take the test again.',
+          cssClass: 'rating-failed',
+          passed: false,
+          icon: '🔄'
+        };
+      }
+      
+      return rating;
+    }
+
+    // ===== MODE SELECTION =====
+    modeReview.addEventListener('click', function() {
+      modeReview.classList.add('active');
+      modeTest.classList.remove('active');
+      selectedMode = 'review';
+      modeDescription.textContent = '📖 Browse all 50 idioms with images, audio, and context.';
+    });
+
+    modeTest.addEventListener('click', function() {
+      modeTest.classList.add('active');
+      modeReview.classList.remove('active');
+      selectedMode = 'test';
+      modeDescription.textContent = '📝 Test your knowledge with 50 multiple-choice questions.';
+    });
+
+    // ===== START FUNCTION =====
+    function startApp() {
+      const name = userNameInput.value.trim();
+      if (!name) {
+        alert('Please enter your name to continue.');
+        userNameInput.focus();
+        return;
+      }
+      userName = name;
+      welcomeScreen.style.display = 'none';
+
+      enableMobileAudio();
+
+      if (selectedMode === 'review') {
+        reviewContainer.classList.remove('hidden-content');
+        reviewContainer.classList.add('active-content');
+        testContainer.classList.add('hidden-content');
+        testContainer.classList.remove('active-content');
+        initReviewMode();
+      } else {
+        testContainer.classList.remove('hidden-content');
+        testContainer.classList.add('active-content');
+        reviewContainer.classList.add('hidden-content');
+        reviewContainer.classList.remove('active-content');
+        initTestMode();
+      }
+    }
+
+    // ===== EVENT LISTENERS =====
+    startBtn.addEventListener('click', startApp);
+    userNameInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        e.stopPropagation();
+        startApp();
+      }
+    });
+
+    // ===== REVIEW MODE (FLIPBOOK) - ALWAYS IN ORDER =====
+    function initReviewMode() {
+      currentPage = 0;
+      
+      const reviewBookContent = document.getElementById('reviewBookContent');
+      reviewBookContent.innerHTML = `
+        <style>
+          .book-inner {
+            background: #f5ede4;
+            border-radius: 12px 4px 4px 12px;
+            padding: 12px 12px 10px 12px;
+            box-shadow: inset 0 0 0 1px #e2d0bf, 0 8px 18px rgba(40, 30, 20, 0.15);
+            min-height: 320px;
+            max-height: 520px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            touch-action: none;
+          }
+          .book-inner .image-page {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+          }
+          .book-inner .image-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            touch-action: none;
+            min-height: 200px;
+          }
+          .book-inner .image-wrapper img {
+            max-width: 100%;
+            max-height: 380px;
+            height: auto;
+            width: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+            border: 1px solid #dac8b8;
+            object-fit: contain;
+            background: #f5ede4;
+            transition: transform 0.1s ease;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            transform-origin: center center;
+            -webkit-tap-highlight-color: transparent;
+            cursor: grab;
+            touch-action: none;
+          }
+          .book-inner .image-wrapper img:active {
+            cursor: grabbing;
+          }
+          .book-inner .image-wrapper img.zoomed {
+            cursor: grab;
+          }
+          .book-inner .image-wrapper img.zoomed:active {
+            cursor: grabbing;
+          }
+          .book-inner .placeholder {
+            background: #e8ddd0;
+            border-radius: 16px;
+            padding: 30px 16px;
+            text-align: center;
+            color: #5f4a38;
+            font-style: italic;
+            border: 2px dashed #b8a18c;
+            width: 100%;
+            font-size: 1rem;
+          }
+          .book-inner .reviewer-footer {
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid #dac8b8;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            font-size: 0.75rem;
+            color: #3d2d1e;
+            text-align: center;
+            width: 100%;
+            border-radius: 0 0 8px 8px;
+            flex-shrink: 0;
+          }
+          .book-inner .reviewer-footer span {
+            background: #dccbbc;
+            padding: 2px 14px;
+            border-radius: 30px;
+            display: inline-block;
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.3);
+          }
+          .book-inner .review-idiom-number {
+            color: #b6d0e8;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 6px;
+            background: #0d233d;
+            padding: 4px 16px;
+            border-radius: 30px;
+            display: inline-block;
+            border: 1px solid #7b2fbe44;
+          }
+          .book-inner .audio-playing-indicator {
+            display: none;
+            color: #f5d742;
+            font-size: 0.75rem;
+            background: #0d233d;
+            padding: 2px 14px;
+            border-radius: 30px;
+            border: 1px solid #f5d742;
+            animation: pulse-glow 1s ease-in-out infinite;
+            margin-left: 8px;
+          }
+          .book-inner .audio-playing-indicator.active {
+            display: inline-block;
+          }
+          @keyframes pulse-glow {
+            0%, 100% { opacity: 1; box-shadow: 0 0 5px #f5d742; }
+            50% { opacity: 0.6; box-shadow: 0 0 15px #f5d742; }
+          }
+          .book-inner .controls-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+          }
+          .book-inner .controls-row button {
+            background: #dccbbc;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #2c1f16;
+            cursor: pointer;
+            box-shadow: 0 2px 0 #b8a18c;
+            transition: 0.05s linear;
+            border: 1px solid #cbb59e;
+            min-height: 34px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+          }
+          .book-inner .controls-row button:active {
+            transform: translateY(2px);
+            box-shadow: none;
+          }
+          .book-inner .audio-btn {
+            background: #4a8c6f;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 2px 0 #2d5a46;
+            transition: 0.05s linear;
+            border: 1px solid #3a7058;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            min-height: 34px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+          }
+          .book-inner .audio-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+          }
+          .book-inner .audio-btn.playing {
+            background: #c0392b;
+            box-shadow: 0 2px 0 #922b21;
+            border-color: #a93226;
+          }
+          .book-inner .voice-selector {
+            background: #dccbbc;
+            border: 1px solid #b8a18c;
+            border-radius: 30px;
+            padding: 3px 10px;
+            font-size: 0.7rem;
+            color: #2c1f16;
+            outline: none;
+            cursor: pointer;
+            max-width: 140px;
+            min-height: 34px;
+            touch-action: manipulation;
+          }
+          .book-inner .voice-selector:focus {
+            border-color: #8b6f58;
+            box-shadow: 0 0 0 2px #dac2ae;
+          }
+          .book-inner .zoom-hint {
+            font-size: 0.6rem;
+            color: #5f4a38;
+            margin-top: 3px;
+            opacity: 0.7;
+            background: #e8ddd0;
+            padding: 2px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            flex-shrink: 0;
+          }
+          .book-inner .enter-hint {
+            font-size: 0.55rem;
+            background: rgba(74, 140, 111, 0.25);
+            padding: 1px 8px;
+            border-radius: 30px;
+            color: #2d5a46;
+            margin-left: 4px;
+            white-space: nowrap;
+            border: 1px solid rgba(74, 140, 111, 0.3);
+          }
+          .book-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            gap: 10px;
+            flex-wrap: wrap;
+          }
+          .book-nav .nav-btn {
+            background: #f7d44a;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a2a4a;
+            box-shadow: 0 4px 0 #c9a820, 0 6px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: 0.08s linear;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+            border: 1px solid #e8c83a;
+            flex: 1 1 auto;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px;
+          }
+          .book-nav .nav-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #c9a820;
+          }
+          .book-nav .nav-btn:disabled {
+            opacity: 0.4;
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #c9a820;
+            pointer-events: none;
+          }
+          .book-nav .nav-btn .key-hint {
+            font-size: 0.65rem;
+            background: rgba(26, 42, 74, 0.15);
+            padding: 2px 10px;
+            border-radius: 30px;
+            color: #1a2a4a;
+            margin-left: 4px;
+            white-space: nowrap;
+          }
+          .book-nav .goto-input {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: #dccbbc;
+            padding: 3px 10px 3px 14px;
+            border-radius: 60px;
+          }
+          .book-nav .goto-input label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #3d2d1e;
+          }
+          .book-nav .goto-input input {
+            width: 48px;
+            padding: 5px 4px 5px 10px;
+            border: 1px solid #b8a18c;
+            border-radius: 40px;
+            background: #f5ede4;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            outline: none;
+            min-height: 34px;
+          }
+          .book-nav .goto-input input:focus {
+            border-color: #8b6f58;
+            box-shadow: 0 0 0 2px #dac2ae;
+          }
+          .book-nav .goto-input button {
+            background: #b3927a;
+            border: none;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.1s;
+            box-shadow: 0 2px 0 #6f5845;
+            border: 1px solid #a5856e;
+            min-height: 34px;
+            touch-action: manipulation;
+          }
+          .book-nav .goto-input button:active {
+            transform: translateY(2px);
+            box-shadow: none;
+          }
+          .book-footer-note {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #5f4a38;
+            margin-top: 10px;
+            padding: 8px 6px 0 6px;
+            letter-spacing: 0.5px;
+            border-top: 1px dashed #cbb59e;
+          }
+          .book-footer-note span {
+            background: #dccbbc;
+            padding: 3px 14px;
+            border-radius: 30px;
+            display: inline-block;
+          }
+          .back-to-welcome {
+            margin-top: 12px;
+            text-align: center;
+          }
+          .back-to-welcome .btn {
+            background: linear-gradient(145deg, #d4961a, #b8860b);
+            color: #ffffff;
+            box-shadow: 0 6px 0 #6b4f0a, 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -3px 0 #4a3506;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            border: none;
+            border-radius: 16px;
+            padding: 12px 28px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            min-height: 44px;
+            justify-content: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            transform: translateY(-3px);
+            border: 1px solid rgba(255,255,255,0.15);
+          }
+          .back-to-welcome .btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #6b4f0a, 0 4px 8px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.15), inset 0 -1px 0 #4a3506;
+          }
+          @media (max-width: 600px) {
+            .book-inner {
+              max-height: 400px;
+              min-height: 240px;
+            }
+            .book-inner .image-wrapper img {
+              max-height: 280px;
+            }
+            .book-nav .nav-btn {
+              padding: 6px 14px;
+              font-size: 0.8rem;
+              min-height: 38px;
+            }
+            .book-nav .goto-input input {
+              width: 40px;
+              font-size: 0.8rem;
+              min-height: 30px;
+            }
+            .book-nav .goto-input button {
+              font-size: 0.7rem;
+              padding: 4px 10px;
+              min-height: 30px;
+            }
+            .book-inner .controls-row button {
+              font-size: 0.65rem;
+              min-height: 30px;
+            }
+            .book-inner .audio-btn {
+              font-size: 0.7rem;
+              min-height: 30px;
+            }
+            .book-inner .voice-selector {
+              font-size: 0.6rem;
+              max-width: 100px;
+              min-height: 30px;
+            }
+          }
+          @media (max-width: 400px) {
+            .book-inner {
+              max-height: 340px;
+              min-height: 200px;
+            }
+            .book-inner .image-wrapper img {
+              max-height: 220px;
+            }
+            .book-nav .nav-btn {
+              font-size: 0.7rem;
+              padding: 5px 10px;
+              min-height: 32px;
+            }
+            .book-nav .nav-btn .key-hint {
+              display: none;
+            }
+          }
+        </style>
+        <div class="book-inner" id="bookInner">
+          <div class="image-page" id="imagePage">
+            <div class="image-wrapper" id="imageWrapper">
+              <img id="reviewImage" src="" alt="Idiom image" style="max-width:100%; max-height:380px; border-radius:10px; box-shadow:0 4px 14px rgba(0,0,0,0.15); border:1px solid #dac8b8; object-fit:contain; background:#f5ede4; cursor:grab; touch-action:none;">
+              <div class="placeholder" style="display:none;">⚠️ image not found</div>
+            </div>
+            <div class="review-idiom-number" id="reviewIdiomNumber">📌 Idiom #151: IN THE RED</div>
+            <div class="controls-row">
+              <button onclick="reviewZoomImage(-0.2)" aria-label="zoom out">➖</button>
+              <button onclick="reviewResetZoom()" aria-label="reset zoom">⟲</button>
+              <button onclick="reviewZoomImage(0.2)" aria-label="zoom in">➕</button>
+              <button class="audio-btn" id="reviewAudioBtn" onclick="reviewToggleAudio()">🔊 Read <span class="enter-hint">↵</span></button>
+              <select class="voice-selector" id="reviewVoiceSelector" onchange="reviewChangeVoice(this.value)" aria-label="select voice"></select>
+              <span class="audio-playing-indicator" id="audioPlayingIndicator">🔊 Playing...</span>
+            </div>
+            <div class="zoom-hint">🖱️ scroll to zoom · +/- keys · pinch to zoom · drag to pan · Space/Enter for audio</div>
+            <div class="reviewer-footer"><span>Reviewer: CSN - Christopher S. Naputo</span></div>
+          </div>
+        </div>
+        <div class="book-nav">
+          <button class="nav-btn" id="reviewPrevBtn">◀ PREV <span class="key-hint">←</span></button>
+          <div class="goto-input">
+            <label for="reviewPageJump">Go</label>
+            <input type="number" id="reviewPageJump" min="1" max="50" value="1" />
+            <button id="reviewJumpBtn">GO</button>
+          </div>
+          <button class="nav-btn" id="reviewNextBtn">NEXT ▶ <span class="key-hint">→</span></button>
+        </div>
+        <div class="book-footer-note">
+          <span>✦ 🖱️ scroll to zoom · +/- keys · pinch to zoom · drag to pan · Space/Enter for audio · ← → navigate ✦</span>
+        </div>
+        <div class="back-to-welcome">
+          <button class="btn" id="reviewBackBtn">🔙 Back to Welcome</button>
+        </div>
+      `;
+
+      // Set up review mode event listeners
+      const reviewPrevBtn = document.getElementById('reviewPrevBtn');
+      const reviewNextBtn = document.getElementById('reviewNextBtn');
+      const reviewJumpBtn = document.getElementById('reviewJumpBtn');
+      const reviewPageJump = document.getElementById('reviewPageJump');
+      const reviewBackBtn = document.getElementById('reviewBackBtn');
+      const reviewImage = document.getElementById('reviewImage');
+      const reviewWrapper = document.getElementById('imageWrapper');
+      const reviewIdiomNumber = document.getElementById('reviewIdiomNumber');
+      const audioPlayingIndicator = document.getElementById('audioPlayingIndicator');
+
+      zoomLevel = 1;
+      panX = 0;
+      panY = 0;
+      currentImg = reviewImage;
+      currentWrapper = reviewWrapper;
+
+      function updateAudioLockState(playing) {
+        if (reviewPrevBtn) {
+          if (playing) {
+            reviewPrevBtn.classList.add('audio-locked');
+          } else {
+            reviewPrevBtn.classList.remove('audio-locked');
+          }
+        }
+        if (reviewNextBtn) {
+          if (playing) {
+            reviewNextBtn.classList.add('audio-locked');
+          } else {
+            reviewNextBtn.classList.remove('audio-locked');
+          }
+        }
+        if (audioPlayingIndicator) {
+          if (playing) {
+            audioPlayingIndicator.classList.add('active');
+          } else {
+            audioPlayingIndicator.classList.remove('active');
+          }
+        }
+      }
+
+      // ===== MOUSE WHEEL ZOOM =====
+      function handleWheelZoom(e) {
+        if (!currentImg) return;
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        zoomLevel = Math.min(Math.max(zoomLevel + delta, 0.3), 4);
+        currentImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+        currentImg.style.transformOrigin = 'center center';
+        if (zoomLevel > 1) {
+          currentImg.classList.add('zoomed');
+        } else {
+          currentImg.classList.remove('zoomed');
+        }
+      }
+
+      // ===== MOUSE DRAG FOR PAN =====
+      function startDrag(e) {
+        if (!currentImg || zoomLevel <= 1) return;
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        startPanX = panX;
+        startPanY = panY;
+        currentImg.style.cursor = 'grabbing';
+        document.addEventListener('mousemove', onDrag);
+        document.addEventListener('mouseup', endDrag);
+        e.preventDefault();
+      }
+
+      function onDrag(e) {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        panX = startPanX + dx;
+        panY = startPanY + dy;
+        currentImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+      }
+
+      function endDrag() {
+        isDragging = false;
+        if (currentImg) {
+          currentImg.style.cursor = zoomLevel > 1 ? 'grab' : 'grab';
+        }
+        document.removeEventListener('mousemove', onDrag);
+        document.removeEventListener('mouseup', endDrag);
+      }
+
+      // ===== TOUCH EVENTS FOR PINCH ZOOM & DRAG =====
+      function handleTouchStart(e) {
+        if (!currentImg) return;
+        const touches = e.touches;
+        
+        if (touches.length === 1) {
+          if (zoomLevel > 1) {
+            isTouching = true;
+            touchStartX = touches[0].clientX;
+            touchStartY = touches[0].clientY;
+            touchStartPanX = panX;
+            touchStartPanY = panY;
+            currentWrapper.classList.add('touch-dragging');
+          }
+        } else if (touches.length === 2) {
+          const dx = touches[0].clientX - touches[1].clientX;
+          const dy = touches[0].clientY - touches[1].clientY;
+          touchZoomStart = Math.sqrt(dx*dx + dy*dy);
+          isTouching = true;
+          currentWrapper.classList.remove('touch-dragging');
+        }
+        e.preventDefault();
+      }
+
+      function handleTouchMove(e) {
+        if (!currentImg || !isTouching) return;
+        const touches = e.touches;
+        
+        if (touches.length === 1 && zoomLevel > 1) {
+          const dx = touches[0].clientX - touchStartX;
+          const dy = touches[0].clientY - touchStartY;
+          panX = touchStartPanX + dx;
+          panY = touchStartPanY + dy;
+          currentImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+        } else if (touches.length === 2) {
+          const dx = touches[0].clientX - touches[1].clientX;
+          const dy = touches[0].clientY - touches[1].clientY;
+          const distance = Math.sqrt(dx*dx + dy*dy);
+          const delta = (distance - touchZoomStart) / 200;
+          zoomLevel = Math.min(Math.max(zoomLevel + delta, 0.3), 4);
+          touchZoomStart = distance;
+          currentImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+          if (zoomLevel > 1) {
+            currentImg.classList.add('zoomed');
+          } else {
+            currentImg.classList.remove('zoomed');
+          }
+        }
+        e.preventDefault();
+      }
+
+      function handleTouchEnd(e) {
+        isTouching = false;
+        currentWrapper.classList.remove('touch-dragging');
+        if (e.changedTouches.length === 1 && zoomLevel === 1) {
+          zoomLevel = 1.5;
+          if (currentImg) {
+            currentImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+            currentImg.classList.add('zoomed');
+          }
+        }
+      }
+
+      function renderReviewPage(index) {
+        if (index < 0) index = 0;
+        if (index >= idioms.length) index = idioms.length - 1;
+        currentPage = index;
+        
+        zoomLevel = 1;
+        panX = 0;
+        panY = 0;
+        isDragging = false;
+        isTouching = false;
+
+        const idiom = idioms[currentPage];
+        const imgName = idiom.filename;
+        currentText = idiom.fullText;
+        
+        if (reviewIdiomNumber) {
+          reviewIdiomNumber.textContent = `📌 Idiom #${idiom.id}: ${idiom.phrase}`;
+        }
+
+        const img = document.getElementById('reviewImage');
+        if (img) {
+          img.src = imgName;
+          img.alt = imgName;
+          img.style.transform = 'translate(0px, 0px) scale(1)';
+          img.style.transformOrigin = 'center center';
+          img.classList.remove('zoomed');
+          img.style.cursor = 'grab';
+          img.style.touchAction = 'none';
+          
+          img.removeEventListener('wheel', handleWheelZoom);
+          img.removeEventListener('mousedown', startDrag);
+          img.removeEventListener('touchstart', handleTouchStart);
+          img.removeEventListener('touchmove', handleTouchMove);
+          img.removeEventListener('touchend', handleTouchEnd);
+          
+          img.addEventListener('wheel', handleWheelZoom, { passive: false });
+          img.addEventListener('mousedown', startDrag);
+          img.addEventListener('touchstart', handleTouchStart, { passive: false });
+          img.addEventListener('touchmove', handleTouchMove, { passive: false });
+          img.addEventListener('touchend', handleTouchEnd, { passive: false });
+          
+          img.onerror = function() {
+            this.style.display = 'none';
+            const placeholder = this.nextElementSibling;
+            if (placeholder) placeholder.style.display = 'block';
+          };
+          img.onload = function() {
+            const placeholder = this.nextElementSibling;
+            if (placeholder) placeholder.style.display = 'none';
+            this.style.display = 'block';
+          };
+        }
+
+        document.getElementById('reviewPageJump').value = currentPage + 1;
+        progressBadge.textContent = `${currentPage+1} / ${idioms.length}`;
+
+        reviewPrevBtn.disabled = (currentPage === 0);
+        reviewNextBtn.disabled = (currentPage === idioms.length - 1);
+        
+        if (isPlaying) {
+          updateAudioLockState(true);
+        }
+
+        setTimeout(populateReviewVoices, 50);
+      }
+
+      function populateReviewVoices() {
+        const selector = document.getElementById('reviewVoiceSelector');
+        if (!selector) return;
+        selector.innerHTML = '';
+        availableVoices.forEach(voice => {
+          const option = document.createElement('option');
+          option.value = voice.name;
+          option.textContent = `${voice.name} (${voice.lang})`;
+          if (voice.name.toLowerCase().includes('callum')) {
+            option.selected = true;
+            selectedVoiceName = voice.name;
+          }
+          selector.appendChild(option);
+        });
+        if (!selector.querySelector('option[selected]') && availableVoices.length > 0) {
+          selector.selectedIndex = 0;
+          selectedVoiceName = availableVoices[0].name;
+        }
+      }
+
+      reviewPrevBtn.addEventListener('click', () => { 
+        if (isPlaying) return;
+        if (currentPage > 0) renderReviewPage(currentPage - 1); 
+      });
+      reviewNextBtn.addEventListener('click', () => { 
+        if (isPlaying) return;
+        if (currentPage < idioms.length - 1) renderReviewPage(currentPage + 1); 
+      });
+      reviewJumpBtn.addEventListener('click', () => {
+        if (isPlaying) return;
+        let p = parseInt(reviewPageJump.value, 10);
+        if (isNaN(p)) p = 1;
+        p = Math.min(Math.max(p, 1), idioms.length);
+        renderReviewPage(p - 1);
+      });
+      reviewPageJump.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          reviewJumpBtn.click();
+        }
+      });
+
+      reviewBackBtn.addEventListener('click', goToWelcome);
+
+      renderReviewPage(0);
+
+      if (availableVoices.length > 0) {
+        populateReviewVoices();
+      } else {
+        speechSynth.onvoiceschanged = function() {
+          availableVoices = speechSynth.getVoices();
+          populateReviewVoices();
+        };
+      }
+    }
+
+    // ===== REVIEW AUDIO FUNCTIONS (GLOBAL) =====
+    window.reviewZoomImage = function(delta) {
+      if (!currentImg) return;
+      zoomLevel = Math.min(Math.max(zoomLevel + delta, 0.3), 4);
+      currentImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+      currentImg.style.transformOrigin = 'center center';
+      if (zoomLevel > 1) {
+        currentImg.classList.add('zoomed');
+      } else {
+        currentImg.classList.remove('zoomed');
+      }
+    };
+
+    window.reviewResetZoom = function() {
+      zoomLevel = 1;
+      panX = 0;
+      panY = 0;
+      if (currentImg) {
+        currentImg.style.transform = `translate(0px, 0px) scale(1)`;
+        currentImg.style.transformOrigin = 'center center';
+        currentImg.classList.remove('zoomed');
+      }
+    };
+
+    window.reviewToggleAudio = function() {
+      const btn = document.getElementById('reviewAudioBtn');
+      if (!btn) return;
+      
+      if (isMobile && !audioEnabled) {
+        enableMobileAudio();
+        if (audioOverlay) {
+          audioOverlay.classList.add('show');
+          audioOverlay.style.display = 'flex';
+          return;
+        }
+      }
+      
+      if (isPlaying) {
+        reviewStopSpeech();
+        btn.textContent = '🔊 Read ↵';
+        btn.classList.remove('playing');
+      } else {
+        reviewStartSpeech();
+        btn.textContent = '⏹ Stop ↵';
+        btn.classList.add('playing');
+      }
+    };
+
+    window.reviewChangeVoice = function(voiceName) {
+      selectedVoiceName = voiceName;
+      if (isPlaying) {
+        reviewStopSpeech();
+        setTimeout(reviewStartSpeech, 100);
+      }
+    };
+
+    function updateAudioLock(playing) {
+      const reviewPrevBtn = document.getElementById('reviewPrevBtn');
+      const reviewNextBtn = document.getElementById('reviewNextBtn');
+      const audioIndicator = document.getElementById('audioPlayingIndicator');
+      
+      if (reviewPrevBtn) {
+        if (playing) {
+          reviewPrevBtn.classList.add('audio-locked');
+        } else {
+          reviewPrevBtn.classList.remove('audio-locked');
+        }
+      }
+      if (reviewNextBtn) {
+        if (playing) {
+          reviewNextBtn.classList.add('audio-locked');
+        } else {
+          reviewNextBtn.classList.remove('audio-locked');
+        }
+      }
+      if (audioIndicator) {
+        if (playing) {
+          audioIndicator.classList.add('active');
+        } else {
+          audioIndicator.classList.remove('active');
+        }
+      }
+    }
+
+    function reviewStartSpeech() {
+      if (!window.speechSynthesis) {
+        alert('Text-to-speech is not supported in this browser.');
+        return;
+      }
+      
+      if (isMobile) {
+        enableMobileAudio();
+      }
+      
+      reviewStopSpeech();
+      
+      const text = currentText || 'No text available.';
+      currentUtterance = new SpeechSynthesisUtterance(text);
+      currentUtterance.lang = 'en-US';
+      currentUtterance.rate = 0.85;
+      currentUtterance.pitch = 1;
+      currentUtterance.volume = 1;
+      
+      const voice = availableVoices.find(v => v.name === selectedVoiceName) || availableVoices[0];
+      if (voice) currentUtterance.voice = voice;
+      
+      currentUtterance.onend = function() {
+        isPlaying = false;
+        updateAudioLock(false);
+        const btn = document.getElementById('reviewAudioBtn');
+        if (btn) { btn.textContent = '🔊 Read ↵'; btn.classList.remove('playing'); }
+      };
+      currentUtterance.onerror = function(event) {
+        console.log('Speech error:', event);
+        isPlaying = false;
+        updateAudioLock(false);
+        const btn = document.getElementById('reviewAudioBtn');
+        if (btn) { btn.textContent = '🔊 Read ↵'; btn.classList.remove('playing'); }
+        
+        if (isMobile && (event.error === 'not-allowed' || event.error === 'synthesis-unavailable')) {
+          setTimeout(() => {
+            if (!isPlaying && audioOverlay) {
+              audioOverlay.classList.add('show');
+              audioOverlay.style.display = 'flex';
+            }
+          }, 500);
+        }
+      };
+      
+      isPlaying = true;
+      updateAudioLock(true);
+      speechSynth.speak(currentUtterance);
+    }
+
+    function reviewStopSpeech() {
+      if (speechSynth) speechSynth.cancel();
+      isPlaying = false;
+      currentUtterance = null;
+      updateAudioLock(false);
+      const btn = document.getElementById('reviewAudioBtn');
+      if (btn) { btn.textContent = '🔊 Read ↵'; btn.classList.remove('playing'); }
+    }
+
+    // ===== TEST MODE =====
+    function initTestMode() {
+      renderTestQuestion(0);
+    }
+
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function buildOptions(currentId) {
+      const current = idioms[currentId];
+      const otherMeanings = idioms.filter((_, i) => i !== currentId).map(item => item.meaning);
+      const shuffled = shuffleArray([...otherMeanings]);
+      let wrongs = shuffled.slice(0, 3);
+      while (wrongs.length < 3) wrongs.push('Not applicable');
+      const options = [current.meaning, ...wrongs];
+      return shuffleArray(options);
+    }
+
+    function renderTestQuestion(index) {
+      const idiom = idioms[index];
+      progressBadge.textContent = `${index+1} / ${idioms.length}`;
+      questionNumber.textContent = `Question #${index+1}`;
+      questionText.textContent = `What does the idiom "${idiom.phrase}" mean?`;
+
+      const optArray = buildOptions(index);
+      optionsContainer.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      
+      selectedOptionIndex = -1;
+      
+      optArray.forEach((text, idx) => {
+        const div = document.createElement('div');
+        div.className = 'option-item';
+        div.setAttribute('data-opt-index', idx);
+        div.setAttribute('data-opt-text', text);
+        div.innerHTML = `<span class="letter">${letters[idx]}</span> ${text}`;
+        div.addEventListener('click', function(e) {
+          e.preventDefault();
+          handleTestOptionClick(index, idx, text, this);
+        });
+        div.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          handleTestOptionClick(index, idx, text, this);
+        }, { passive: false });
+        optionsContainer.appendChild(div);
+      });
+
+      if (userAnswers[index] !== null) {
+        const prevAns = userAnswers[index];
+        const allOpts = document.querySelectorAll('.option-item');
+        allOpts.forEach(el => {
+          if (el.getAttribute('data-opt-text') === prevAns) {
+            el.classList.add('selected');
+            el.classList.add('submitted');
+            selectedOptionIndex = parseInt(el.getAttribute('data-opt-index'));
+          }
+        });
+      }
+
+      analysisPanel.style.display = 'none';
+      
+      prevBtn.disabled = (index === 0);
+      nextBtn.disabled = false;
+      examResultArea.style.display = 'none';
+      examSubmitted = false;
+      
+      submitAnswerBtn.style.display = 'inline-flex';
+      resetBtn.style.display = 'inline-flex';
+      
+      let submitExamBtn = document.getElementById('submitExamBtn');
+      if (index === idioms.length - 1) {
+        if (!submitExamBtn) {
+          submitExamBtn = document.createElement('button');
+          submitExamBtn.id = 'submitExamBtn';
+          submitExamBtn.className = 'btn btn-exam';
+          submitExamBtn.textContent = '📊 Submit Exam';
+          submitExamBtn.addEventListener('click', handleSubmitExam);
+          btnRow.appendChild(submitExamBtn);
+        }
+        submitExamBtn.style.display = 'inline-flex';
+      } else {
+        if (submitExamBtn) {
+          submitExamBtn.style.display = 'none';
+        }
+      }
+    }
+
+    function handleTestOptionClick(index, optIdx, optText, element) {
+      if (examSubmitted) return;
+      if (element.classList.contains('submitted')) return;
+      
+      const allOpts = document.querySelectorAll('.option-item');
+      allOpts.forEach(el => {
+        el.classList.remove('selected');
+      });
+      
+      element.classList.add('selected');
+      selectedOptionIndex = optIdx;
+      userAnswers[index] = optText;
+      
+      analysisPanel.style.display = 'none';
+    }
+
+    function showTestAnalysis(index) {
+      const idiom = idioms[index];
+      const meaning = idiom.meaning;
+      const phrase = idiom.phrase;
+      const userAnswer = userAnswers[index];
+      const isCorrect = (userAnswer === meaning);
+      
+      const allOpts = document.querySelectorAll('.option-item');
+      allOpts.forEach(el => {
+        el.classList.remove('selected-correct', 'selected-wrong', 'selected');
+        el.classList.add('submitted');
+        const text = el.getAttribute('data-opt-text');
+        if (text === userAnswer) {
+          el.classList.add(isCorrect ? 'selected-correct' : 'selected-wrong');
+        }
+        if (text === meaning && !isCorrect) {
+          el.classList.add('selected-correct');
+        }
+      });
+      
+      const steps = [
+        { label: '1. STEP-BY-STEP ANALYSIS', content: `"${phrase}" – in context, the idiom conveys: "${meaning}". The speaker uses figurative language to express a concept beyond literal words.` },
+        { label: '2. WORD DEFINITION', content: `Literal breakdown: ${phrase.split(' ').map(w => `“${w}”`).join(' · ')}. But idiomatically, it means: ${meaning}.` },
+        { label: '3. CONTEXT ANALYSIS', content: idiom.context },
+        { label: '4. CONCLUSION', content: `The correct answer is: “${meaning}”. This matches the figurative intent of the idiom.` },
+        { label: '5. REFERENCES', content: `📖 IDIOM-BOOK-VOL.4 · entry #${idiom.id} · "${phrase}" · CSE style reference.` }
+      ];
+      
+      let html = '';
+      steps.forEach(step => {
+        let bg = step.label.includes('REFERENCES') ? '#1e3a57' : '#132d47';
+        html += `<div class="analysis-step" style="background:${bg};"><strong>${step.label}</strong><br><div class="step-text">${step.content}</div>`;
+        if (step.label.includes('REFERENCES')) {
+          html += `<div class="ref"><strong>📁</strong> ${idiom.filename}</div>`;
+        }
+        html += `</div>`;
+      });
+      
+      const badge = isCorrect ? '✅ Correct' : '❌ Incorrect';
+      html = `<div style="background:${isCorrect ? '#1f5d3b' : '#6a2e3a'}; border-radius:40px; padding:8px 24px; margin-bottom:16px; font-weight:700; font-size:1.6rem; color:white; text-align:center;">${badge}</div>` + html;
+      analysisContent.innerHTML = html;
+      analysisPanel.style.display = 'block';
+    }
+
+    function goToTestQuestion(index) {
+      if (index < 0 || index >= idioms.length) return;
+      currentIndex = index;
+      renderTestQuestion(index);
+    }
+
+    function handleSubmitAnswer() {
+      if (examSubmitted) return;
+      if (selectedOptionIndex === -1 && userAnswers[currentIndex] === null) {
+        alert('Please select an answer first.');
+        return;
+      }
+      showTestAnalysis(currentIndex);
+    }
+
+    function calculateScore() {
+      let correctCount = 0, wrongCount = 0;
+      for (let i = 0; i < userAnswers.length; i++) {
+        if (userAnswers[i] === null) {
+          wrongCount++;
+          continue;
+        }
+        if (userAnswers[i] === idioms[i].meaning) correctCount++;
+        else wrongCount++;
+      }
+      return { correctCount, wrongCount };
+    }
+
+    function handleSubmitExam() {
+      const { correctCount, wrongCount } = calculateScore();
+      
+      const rating = getPerformanceRating(correctCount, idioms.length);
+      
+      popupName.textContent = `Hey, ${userName}!`;
+      popupScore.textContent = correctCount;
+      
+      popupRating.textContent = `${rating.icon} ${rating.label}`;
+      popupRating.className = `popup-rating ${rating.cssClass}`;
+      
+      popupOverlay.classList.add('active');
+      examCompleted = true;
+      
+      window._examResults = { correctCount, wrongCount, rating };
+    }
+
+    function showExamResults() {
+      const { correctCount, wrongCount, rating } = window._examResults || calculateScore();
+      const finalRating = rating || getPerformanceRating(correctCount, idioms.length);
+      
+      let mistakes = [];
+      for (let i = 0; i < userAnswers.length; i++) {
+        if (userAnswers[i] === null) {
+          mistakes.push({ index: i, userAns: 'No answer', correct: idioms[i].meaning });
+          continue;
+        }
+        if (userAnswers[i] !== idioms[i].meaning) {
+          mistakes.push({ index: i, userAns: userAnswers[i], correct: idioms[i].meaning });
+        }
+      }
+
+      let html = `<h3 style="color:#f5d742; font-size:1.8rem;">📊 EXAM RESULTS</h3>`;
+      if (userName) {
+        html += `<p style="color:#b6d0e8; font-size:1.1rem; margin-bottom:8px;">👤 Test Taker: <strong style="color:#f5d742;">${userName}</strong></p>`;
+      }
+      
+      const percentage = ((correctCount / idioms.length) * 100).toFixed(1);
+      const passed = finalRating.passed;
+      
+      html += `<div class="performance-rating ${finalRating.cssClass}">
+                <span class="rating-icon">${finalRating.icon}</span>
+                <span class="rating-label">${finalRating.label}</span>
+                <div class="rating-sub">${finalRating.sub}</div>
+              </div>`;
+      
+      html += `<div style="display:flex; gap:20px; margin:12px 0; font-size:1.4rem; flex-wrap:wrap; justify-content:center;">
+                  <span style="color:#a3e0a3;">✅ Correct: ${correctCount}</span>
+                  <span style="color:#ffb3b3;">❌ Wrong: ${wrongCount}</span>
+                  <span style="color:#f5e56b;">📝 Total: ${idioms.length}</span>
+                  <span style="color:#b6d0e8;">📊 Score: ${percentage}%</span>
+                </div>`;
+      
+      html += `<div style="text-align:center; margin-bottom:12px;">
+                <span class="pass-status ${passed ? 'passed' : 'failed'}">
+                  ${passed ? '✅ PASSED!' : '❌ NOT PASSED'}
+                </span>
+                <span style="color:#b6d0e8; font-size:0.9rem; margin-left:12px;">Passing Score: 40/50 (80%)</span>
+              </div>`;
+      
+      if (mistakes.length === 0) {
+        html += `<div style="background:#1f5d3b; padding:20px; border-radius:30px; font-size:1.4rem; color:white; text-align:center;">🎉 PERFECT SCORE! No mistakes. Excellent work!</div>`;
+      } else {
+        html += `<div class="mistake-list"><h4 style="color:#f5d742;">❌ Mistakes (${mistakes.length})</h4>`;
+        mistakes.forEach(m => {
+          html += `<div class="mistake-item">
+                    <strong>#${m.index+1}:</strong> ${idioms[m.index].phrase} 
+                    <span style="color:#ffb3b3;">Your answer: ${m.userAns}</span> → 
+                    <span class="correct-answer">Correct: ${m.correct}</span>
+                  </div>`;
+        });
+        html += `</div>`;
+      }
+      examResultArea.innerHTML = html;
+      examResultArea.style.display = 'block';
+      examSubmitted = true;
+      analysisPanel.style.display = 'none';
+      
+      const submitExamBtn = document.getElementById('submitExamBtn');
+      if (submitExamBtn) {
+        submitExamBtn.style.display = 'none';
+      }
+    }
+
+    // ===== TEST EVENT LISTENERS =====
+    prevBtn.addEventListener('click', () => { if (currentIndex > 0) goToTestQuestion(currentIndex - 1); });
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < idioms.length - 1) goToTestQuestion(currentIndex + 1);
+    });
+    submitAnswerBtn.addEventListener('click', handleSubmitAnswer);
+    resetBtn.addEventListener('click', resetTest);
+
+    finishBtn.addEventListener('click', function() {
+      popupOverlay.classList.remove('active');
+      showExamResults();
+    });
+
+    function resetTest() {
+      if (examCompleted || examResultArea.style.display === 'block') {
+        goToWelcome();
+      } else {
+        userAnswers = new Array(idioms.length).fill(null);
+        selectedOptionIndex = -1;
+        examSubmitted = false;
+        examResultArea.style.display = 'none';
+        popupOverlay.classList.remove('active');
+        window._examResults = null;
+        currentIndex = 0;
+        
+        const submitExamBtn = document.getElementById('submitExamBtn');
+        if (submitExamBtn) {
+          submitExamBtn.remove();
+        }
+        
+        renderTestQuestion(0);
+      }
+    }
+
+    // ===== NAVIGATION =====
+    function goToWelcome() {
+      userAnswers = new Array(idioms.length).fill(null);
+      selectedOptionIndex = -1;
+      examSubmitted = false;
+      examCompleted = false;
+      examResultArea.style.display = 'none';
+      popupOverlay.classList.remove('active');
+      window._examResults = null;
+      currentIndex = 0;
+      currentPage = 0;
+      
+      const submitExamBtn = document.getElementById('submitExamBtn');
+      if (submitExamBtn) {
+        submitExamBtn.remove();
+      }
+      
+      reviewContainer.classList.add('hidden-content');
+      reviewContainer.classList.remove('active-content');
+      testContainer.classList.add('hidden-content');
+      testContainer.classList.remove('active-content');
+      
+      progressBadge.textContent = '📚 Ready';
+      progressBadge.className = 'progress-badge welcome-badge';
+      
+      welcomeScreen.style.display = 'block';
+      userNameInput.value = '';
+      userNameInput.focus();
+    }
+
+    // ===== KEYBOARD SHORTCUTS =====
+    document.addEventListener('keydown', function(e) {
+      if (reviewContainer.classList.contains('active-content')) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+        
+        if (e.key === '+' || e.key === '=') {
+          e.preventDefault();
+          if (!isPlaying && currentImg) {
+            reviewZoomImage(0.2);
+          }
+          return;
+        } else if (e.key === '-') {
+          e.preventDefault();
+          if (!isPlaying && currentImg) {
+            reviewZoomImage(-0.2);
+          }
+          return;
+        }
+        
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          if (isPlaying) return;
+          const reviewPrevBtn = document.getElementById('reviewPrevBtn');
+          if (reviewPrevBtn && !reviewPrevBtn.disabled) {
+            reviewPrevBtn.click();
+          }
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          if (isPlaying) return;
+          const reviewNextBtn = document.getElementById('reviewNextBtn');
+          if (reviewNextBtn && !reviewNextBtn.disabled) {
+            reviewNextBtn.click();
+          }
+        } else if (e.key === ' ' || e.key === 'Space' || e.key === 'Enter') {
+          e.preventDefault();
+          const audioBtn = document.getElementById('reviewAudioBtn');
+          if (audioBtn) {
+            if (isPlaying) {
+              reviewStopSpeech();
+              audioBtn.textContent = '🔊 Read ↵';
+              audioBtn.classList.remove('playing');
+            } else {
+              reviewStartSpeech();
+              audioBtn.textContent = '⏹ Stop ↵';
+              audioBtn.classList.add('playing');
+            }
+          }
+        }
+        return;
+      }
+      
+      if (testContainer.classList.contains('active-content')) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+        
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          nextBtn.click();
+        } else if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          if (currentIndex === idioms.length - 1) {
+            const submitExamBtn = document.getElementById('submitExamBtn');
+            if (submitExamBtn && submitExamBtn.style.display !== 'none') {
+              submitExamBtn.click();
+              return;
+            }
+          }
+          submitAnswerBtn.click();
+        }
+      }
+    });
+
+    // ===== LOAD VOICES =====
+    function loadVoices() {
+      return new Promise((resolve) => {
+        if (speechSynth.getVoices().length > 0) {
+          availableVoices = speechSynth.getVoices();
+          resolve(availableVoices);
+        } else {
+          speechSynth.onvoiceschanged = function() {
+            availableVoices = speechSynth.getVoices();
+            resolve(availableVoices);
+          };
+        }
+      });
+    }
+
+    // ===== INIT =====
+    loadVoices().then(() => {
+      // Voices are ready
+    });
+
+    setTimeout(checkMobileAudio, 500);
+
+    welcomeScreen.style.display = 'block';
+    reviewContainer.classList.add('hidden-content');
+    reviewContainer.classList.remove('active-content');
+    testContainer.classList.add('hidden-content');
+    testContainer.classList.remove('active-content');
+
+  })();
+</script>
+</body>
+</html>
